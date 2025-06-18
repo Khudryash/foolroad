@@ -1,8 +1,9 @@
 import pygame
-import sys
 import random
 from collections import defaultdict, deque
 import math
+import os
+import sys
 # import pymunk  # для решения пункта 4
 
 # Инициализация Pygame
@@ -11,7 +12,7 @@ pygame.init()
 # space.gravity = (0, 0)
 
 # Параметры окна
-WIDTH, HEIGHT = 1920, 1080
+WIDTH, HEIGHT = 1500, 900
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Freeways Clone - Final Version")
 
@@ -91,6 +92,10 @@ stats_font = pygame.font.SysFont('Arial', 20)
 eval_button = pygame.Rect(WIDTH // 2 - 100, HEIGHT - 60, 200, 50)
 restart_button = pygame.Rect(WIDTH // 2 - 100, HEIGHT - 120, 200, 50)
 
+def resource_path(relative_path):
+    """Получить путь к ресурсу в dev/в .exe"""
+    base_path = getattr(sys, '_MEIPASS', os.path.abspath("."))
+    return os.path.join(base_path, relative_path)
 
 class Car:
     def __init__(self, path, speed, car_id, target_speed=max_speed):
@@ -118,7 +123,7 @@ class Car:
         self.collision_radius = car_radius
         self.collision_cooldown = 0
 
-        raw_img = pygame.image.load(f'car-{random.randint(1, 9)}.png').convert_alpha()
+        raw_img = pygame.image.load(resource_path(f'assets/car-{random.randint(1, 9)}.png')).convert_alpha()
         scale = (car_radius * 5, car_radius * 5)  # ширина и высота примерно диаметра кружка
         self.image_original = pygame.transform.smoothscale(raw_img, scale)
         self.image = self.image_original
