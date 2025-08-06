@@ -6,7 +6,7 @@ import os
 import sys
 # import pymunk  # для решения пункта 4
 
-# Инициализация Pygame
+#  Инициализация Pygame
 pygame.init()
 # space = pymunk.Space()
 # space.gravity = (0, 0)
